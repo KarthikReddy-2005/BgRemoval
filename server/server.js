@@ -7,6 +7,7 @@ import userRouter from "./routes/userRoute.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
+await connectMongoDB();
 
 app.use(express.json());
 app.use(cors());
@@ -17,7 +18,6 @@ app.get("/", (req, res) => {
 app.use("/api/user", userRouter);
 
 app.listen(PORT, async () => {
-  await connectMongoDB();
   console.log("Server is running at : http://localhost:" + PORT);
 });
 
