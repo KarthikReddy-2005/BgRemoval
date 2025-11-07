@@ -53,9 +53,23 @@ const clerkWebhooks = async (req, res) => {
         break;
     }
   } catch (error) {
-    console.log(error.message);
+    console.log("error in clerkWebhooks controller :", error.message);
     res.json({ success: false, message: error.message });
   }
 };
 
-export { clerkWebhooks };
+const userCredits = async (req, res) => {
+  try {
+    const { clerkId } = req.clerkId;
+    const userData = await userModel.findOne(clerkId);
+    if (!userData) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    res.json({ success: true, credits: userData.creditBalance });
+  } catch (error) {
+    console.log("error in userCredits controller :", error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { clerkWebhooks, userCredits };

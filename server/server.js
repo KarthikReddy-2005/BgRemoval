@@ -4,6 +4,7 @@ import cors from "cors";
 
 import connectMongoDB from "./configs/mongodb.js";
 import userRouter from "./routes/userRoute.js";
+import imageRouter from "./routes/imageRoute.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
   res.send("Server is Live");
 });
 app.use("/api/user", userRouter);
+app.use("/api/image", imageRouter);
 
 app.listen(PORT, async () => {
   console.log("Server is running at : http://localhost:" + PORT);
